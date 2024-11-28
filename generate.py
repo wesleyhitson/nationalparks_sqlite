@@ -27,9 +27,10 @@ def main():
     con = sqlite3.connect("parks.db")
     cur = con.cursor()
     cur.execute("DROP TABLE IF EXISTS parks")
-    cur.execute("""CREATE TABLE IF NOT EXISTS parks(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-                name, parkCode, designation, states, latitude, longitude, 
-                visited TINYINE DEFAULT 0)""")
+    cur.execute("""CREATE TABLE IF NOT EXISTS parks(
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+                name, parkCode, designation, states, latitude, 
+                longitude, visited TINYINE DEFAULT 0)""")
     
     # read csv and insert
     data = []
@@ -44,6 +45,7 @@ def main():
                     data)
     con.commit()
 
+    # checking our work
     res = cur.execute("SELECT * FROM parks")
     for r in res:
         print(r)
